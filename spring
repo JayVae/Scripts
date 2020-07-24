@@ -1,8 +1,28 @@
 1. 框架：分层、轻量式
 2. IOC/DI
 3. AOP
+AOP是基于动态代理模式。
+AOP是方法级别的（要测试的方法不能为static修饰，因为接口中不能存在静态方法，编译就会报错）。
+AOP可以分离业务代码和关注点代码（重复代码），在执行业务代码时，动态的注入关注点代码。切面就是关注点代码形成的类。
+
 4. 体系结构
 
 5. 
 MVC全名是Model View Controller，是模bai型(model)－视图(view)－控制器(controller)的缩写，一种软件设计模式，用业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。
 而Spring MVC是一个MVC框架。Spring MVC是基于Spring功能之上添加的Web框架，想用Spring MVC必须先依赖Spring。 Spring可以说是一个管理bean的容器，也可以说是包括很多开源项目的总称，spring mvc是其中一个开源项目。
+
+6. spring mvc
+https://zhuanlan.zhihu.com/p/27913104
+
+7. SSM整体启动流程
+
+ spring的核心配置文件的名字 叫做 applicationContext.xml
+ 
+ tomcat启动一个WEB项目的时候，WEB容器会去读取它的配置文件web.xml，读取<listener>和<context-param>两个结点。
+ 紧接着，容器创建一个ServletContext（servlet上下文，全局的），这个web项目的所有部分都将共享这个上下文。可以把ServletContext看成是一个Web应用的服务器端组件的共享内存，在ServletContext中可以存放共享数据。ServletContext对象是真正的一个全局对象，凡是web容器中的Servlet都可以访问
+ 容器将<context-param>转换为键值对，并交给servletContext。
+  容器创建<listener>中的类实例，创建监听器。  listener中ContextLoaderListener监听器的作用就是启动Web容器时，监听servletContext对象的变化，获取servletContext对象的<context-param>，来自动装配ApplicationContext的配置信息。（即加载applicationContext.xml文件）
+ 
+ web项目启动时，读取web.xml配置文件，首先解析的是applicationContext.xml文件，其次才是sping-mvc.xml文件，sping-mvc.xml文件中主要的工作是：启动注解、扫描controller包注解；静态资源映射；视图解析（defaultViewResolver）；文件上传（multipartResolver）;返回消息json配置。
+
+ https://www.cnblogs.com/diandianquanquan/p/10965047.html
