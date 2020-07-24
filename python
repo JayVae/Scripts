@@ -104,3 +104,54 @@ class Dog:
 
     def __init__(self, name):
         self.name = name    # instance variable unique to each instance
+        
+ 使用实例对象引用属性稍微复杂一些，因为实例对象可引用类属性以及实例属性。但是实例对象引用属性时遵循以下规则：
+总是先到实例对象中查找属性，再到类属性中查找属性；
+属性绑定语句总是为实例对象创建新属性，属性存在时，更新属性指向的对象。
+
+类对象Dog与实例对象dog均有属性country，按照规则，dog.country会引用到实例对象的属性；但实例对象dog没有属性kind，按照规则会引用类对象的属性。
+
+示例2：
+
+class Dog:
+
+	kind = 'canine'
+	country = 'China'
+
+	def __init__(self, name, age, country):
+		self.name = name
+		self.age = age
+		self.country = country
+
+dog = Dog('Lily', 3, 'Britain')
+print(dog.name, dog.age, dog.kind, dog.country) # Lily 3 canine Britain
+print(dog.__dict__) # {'name': 'Lily', 'age': 3, 'country': 'Britain'}
+
+dog.kind = 'feline'
+print(dog.name, dog.age, dog.kind, dog.country) # Lily 3 feline Britain
+print(dog.__dict__) 
+print(Dog.kind) # canine 没有改变类属性的指向
+# {'name': 'Lily', 'age': 3, 'country': 'Britain', 'kind': 'feline'}
+使用属性绑定语句dog.kind = 'feline'，按照规则，为实例对象dog增加了属性kind，后面使用dog.kind引用到实例对象的属性。
+
+这里不要以为会改变类属性Dog.kind的指向，实则是为实例对象新增属性，可以使用查看__dict__的方式证明这一点。
+
+示例3，可变类属性引用：
+
+class Dog:
+	
+	tricks = []
+
+	def __init__(self, name):
+		self.name = name
+
+	def add_trick(self, trick):
+		self.tricks.append(trick)
+
+d = Dog('Fido')
+e = Dog('Buddy')
+d.add_trick('roll over')
+e.add_trick('play dead')
+print(d.tricks) # ['roll over', 'play dead']
+语句self.tricks.append(trick)并不是属性绑定语句，因此还是在类属性上修改可变对象。【属性绑定语句是objname.attr = attr_value】
+（4）python是动态语言，可以运行时增加、删除属性
