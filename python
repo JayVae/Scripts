@@ -70,3 +70,37 @@ deepcopy深拷贝，包含对象里面的自对象的拷贝，所以原始对象
 - 包含输入脚本的目录（或者未指定文件时的当前目录）。
 - PYTHONPATH （一个包含目录名称的列表，它和shell变量 PATH 有一样的语法）。
 - 取决于安装的默认设置
+
+11. 类
+（1）类的实例对象数据属性不需要声明；像局部变量一样，它们将在第一次被赋值时产生。以下counter在类声明中没有定义。
+class MyClass:
+    """A simple example class"""
+    i = 12345
+
+    def f(self):
+        return 'hello world'
+
+x = MyClass()
+
+x.counter = 1
+while x.counter < 10:
+    x.counter = x.counter * 2
+print(x.counter)
+del x.counter
+（2）方法对象
+立即调用一个方法并不是必须的: x.f 是一个方法对象，它可以被保存起来以后再调用。 例如:
+
+xf = x.f
+while True:
+    print(xf())
+将继续打印 hello world，直到结束。
+（3）类变量和实例变量
+一般来说，实例变量用于每个实例的唯一数据，而类变量用于类的所有实例共享的属性和方法。但是共享属性是可以在自己对象中修改的，并且隔离，除了下一行的情况，如存在地址引用。
+正如 名称和对象 中已讨论过的，共享数据可能在涉及 mutable 对象例如列表和字典的时候导致令人惊讶的结果。 例如以下代码中的 tricks 列表不应该被用作类变量，因为所有的 Dog 实例将只共享一个单独的列表。
+
+class Dog:
+
+    kind = 'canine'         # class variable shared by all instances
+
+    def __init__(self, name):
+        self.name = name    # instance variable unique to each instance
