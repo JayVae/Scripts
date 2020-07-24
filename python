@@ -155,3 +155,6 @@ e.add_trick('play dead')
 print(d.tricks) # ['roll over', 'play dead']
 语句self.tricks.append(trick)并不是属性绑定语句，因此还是在类属性上修改可变对象。【属性绑定语句是objname.attr = attr_value】
 （4）python是动态语言，可以运行时增加、删除属性
+
+12. 在Python中可以通过在变量属性以及方法属性是否有下划线“_”进行区分public、protected、private类型。
+在python中数据和方法默认都是pubic类型的，此时方法和变量名都没有下划线。(JAVA 中默认是default)
