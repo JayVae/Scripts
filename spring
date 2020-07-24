@@ -2,3 +2,7 @@
 2. IOC/DI
 3. AOP
 4. 体系结构
+
+5. 
+MVC全名是Model View Controller，是模bai型(model)－视图(view)－控制器(controller)的缩写，一种软件设计模式，用业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。
+而Spring MVC是一个MVC框架。Spring MVC是基于Spring功能之上添加的Web框架，想用Spring MVC必须先依赖Spring。 Spring可以说是一个管理bean的容器，也可以说是包括很多开源项目的总称，spring mvc是其中一个开源项目。
